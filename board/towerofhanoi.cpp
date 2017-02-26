@@ -220,7 +220,7 @@ void towerOfHanoi::solve()
     else
     {
         startRodToAuxRod();
-        cout.flush();
+        std::cout.flush();
         startRodToEndRod();
         auxRodToEndRod();
     }
@@ -879,7 +879,7 @@ int towerOfHanoi::posY(int rodNum)
     int yPosition = 950;
 
     // Find the heights of all disks in the rod and add to y position
-    stack<int> temp = rod[rodNum];
+    std::stack<int> temp = rod[rodNum];
     for(int i = 0; i < rod[rodNum].size(); i++)
     {
         int disk = temp.top();
