@@ -1,18 +1,13 @@
 #ifndef TOWEROFHANOI_H
 #define TOWEROFHANOI_H
-#include <iostream>
-using namespace std;
+
 #include <stack>
 #include <queue>
 #include <string>
+#include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "../shader/shader.h"
-
-enum TOH_ERRORS { DISK_VALUE_SMALL,
-                  ROD_VALUE_SMALL,
-                  RATIO_WARNING };
 
 enum gameState { PRE_GAME, IN_GAME, POST_GAME };
 
@@ -23,25 +18,6 @@ class towerOfHanoi
         ~towerOfHanoi();
 
         void run();
-        inline void print()
-        {
-            for(int i = 0; i < numRods; i++)
-            {
-                cout<<i<<": ";
-                int size = rod[i].size();
-                int arr[rod[i].size()];
-                stack<int> temp = rod[i];
-                while(!temp.empty())
-                {
-                    arr[temp.size()-1] = temp.top();
-                    temp.pop();
-                }
-                for(int j = 0; j < size; j++)
-                    cout<<arr[j]<<" ";
-                cout<<endl;
-            }
-            cout<<endl;
-        }
 
     private:
         // Data structure to represent the towers
