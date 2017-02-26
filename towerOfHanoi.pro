@@ -4,7 +4,6 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    shader/shader.cpp \
     board/towerofhanoi.cpp
 
 
@@ -17,6 +16,5 @@ INCLUDEPATH += "/home/allen/SFML/include"
 DEPENDPATH += "/home/allen/SFML/include"
 
 HEADERS += \
-    shader/shader.h \
     board/towerofhanoi.h
 
