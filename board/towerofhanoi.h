@@ -16,7 +16,6 @@ class towerOfHanoi
     public:
         towerOfHanoi();
         ~towerOfHanoi();
-
         void run();
 
     private:
@@ -79,8 +78,8 @@ class towerOfHanoi
         void animateMist();
 
         // Sound
-        sf::SoundBuffer sfxBuffer;
-        sf::Sound sfx;
+        sf::SoundBuffer sfxMoveBuffer, sfxTickBuffer[2];
+        sf::Sound sfxMove, sfxTick[2];
 
         // Text/Menu
         sf::Font font;
