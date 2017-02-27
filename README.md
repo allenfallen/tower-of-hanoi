@@ -10,10 +10,10 @@ The objective of the game is to move the entire stack of disks to the right-most
 Disks are numbered 1 to N in order from largest to smallest, and there are R rods.
 
 ### 3 rods
-While continually iterating from rod 1 to R until the end rod is full,
+While continuously iterating from rod 1 to R until the end rod is full,
  1. Check the disk number on top of the rod
- 2. Even-numbered disks move left, and odd-numbered disks move right (if possible)
- 3. If the disk can be moved, it cannot be moved again until different disk is moved.
+ 2. If possible, move the disk left if it is an even number, or right if it is an odd number
+ 3. If the disk is moved, it cannot be moved again until different disk is moved.
  
 The optimal number of moves is 2^N - 1.
 
@@ -23,7 +23,7 @@ Assuming N > R, there will be R - 3 rods, named auxiliary rods, that store up to
 
 N <= R are nearly trivial solutions.
 
-The number of moves done in this solution is depicted in the picture below.
+The number of moves done in this solution is depicted below.
 
 ![formula](screenshots/formula.png)
 
