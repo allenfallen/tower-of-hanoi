@@ -58,7 +58,7 @@ towerOfHanoi::towerOfHanoi()
     mistSprite[1].setColor(sf::Color(255, 255, 255, mistMinAlpha));
 
     // Sound
-    sfxMoveBuffer.loadFromFile("resources/sound/sfxMove2.wav");
+    sfxMoveBuffer.loadFromFile("resources/sound/sfxMove.wav");
     sfxMove.setBuffer(sfxMoveBuffer);
     for(int i = 0; i < 2; i++)
     {
@@ -867,9 +867,6 @@ void towerOfHanoi::getNextInstruction()
 {
     if(!solveData.empty() && !moveInProgress)
     {
-        // Play move sound
-//        sfxMove.play();
-
         // Obtain next instruction in moveData
         instruction = solveData.front();
         solveData.pop();
