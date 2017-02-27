@@ -14,6 +14,8 @@ While continually iterating from rod 1 to R until the end rod is full,
  1. Check the disk number on top of the rod
  2. Even-numbered disks move left, and odd-numbered disks move right (if possible)
  3. If the disk can be moved, it cannot be moved again until different disk is moved.
+ 
+The optimal number of moves is 2^N - 1.
 
 ### 4 rods and above
 
@@ -21,6 +23,9 @@ Assuming N > R, there will be R - 3 rods, named auxiliary rods, that store up to
 
 N <= R are nearly trivial solutions.
 
+The number of moves done in this solution is depicted in the picture below.
+
+![formula](screenshots/formula.png)
 
 # Keys
  - `space` to trigger a move
