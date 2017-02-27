@@ -249,7 +249,7 @@ void towerOfHanoi::startRodToAuxRod()
         for(int j = 0; j < numRods - auxRod[i]; j++)
         {
             // No need to create anymore auxiliary rods
-            if(rod[endRod].empty() && !rod[1].empty() && rod[startRod].size() < rod[1].size())
+            if(rod[endRod].empty() && !rod[i].empty() && rod[startRod].size() < rod[i].size())
                 return;
 
             // Search for an empty rod starting from the end rod downwards
