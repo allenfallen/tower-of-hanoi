@@ -249,7 +249,7 @@ void towerOfHanoi::startRodToAuxRod()
         for(int j = 0; j < numRods - auxRod[i]; j++)
         {
             // No need to create anymore auxiliary rods
-            if(rod[endRod].empty() && !rod[1].empty() && rod[startRod].size() <= rod[1].size())
+            if(rod[endRod].empty() && !rod[1].empty() && rod[startRod].size() < rod[1].size())
                 return;
 
             // Search for an empty rod starting from the end rod downwards
@@ -556,6 +556,7 @@ void towerOfHanoi::preGameEvent(sf::Event event)
             // Quit
             case sf::Keyboard::Q:
                 window.close();
+                std::cout.flush();
                 break;
 
             // Increment focus
@@ -667,9 +668,16 @@ void towerOfHanoi::inGameEvent(sf::Event event)
     {
         switch(event.key.code)
         {
-            // Quit to title screen
+            // Quit
             case sf::Keyboard::Q:
+                window.close();
+                std::cout.flush();
+                break;
+
+            // Restart
+            case sf::Keyboard::R:
                 clearSettings();
+                std::cout.flush();
                 break;
 
             // Trigger a move
@@ -700,6 +708,7 @@ void towerOfHanoi::postGameEvent(sf::Event event)
             // Quit
             case sf::Keyboard::Q:
                 window.close();
+                std::cout.flush();
                 break;
 
             // Returns to title screen
