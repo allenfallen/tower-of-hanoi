@@ -57,9 +57,15 @@ towerOfHanoi::towerOfHanoi()
     mistSprite[1].setPosition(0, 400);
     mistSprite[1].setColor(sf::Color(255, 255, 255, mistMinAlpha));
 
-    // Move sound effects
-    sfxBuffer.loadFromFile("resources/sound/sfxMove.wav");
-    sfx.setBuffer(sfxBuffer);
+    // Sound
+    sfxMoveBuffer.loadFromFile("resources/sound/sfxMove2.wav");
+    sfxMove.setBuffer(sfxMoveBuffer);
+    for(int i = 0; i < 2; i++)
+    {
+        sfxTickBuffer[i].loadFromFile("resources/sound/sfxTick" + std::to_string(i+1) + ".wav");
+        sfxTick[i].setBuffer(sfxTickBuffer[i]);
+        sfxTick[i].setVolume(25);
+    }
 
     // Title
     font.loadFromFile("resources/font/hanoi.ttf");
@@ -156,9 +162,10 @@ towerOfHanoi::~towerOfHanoi()
     if(diskSprite)
         delete[] diskSprite;
 
-    numDisks = numRods = startRod = endRod = focus = NULL;
     rod = nullptr;
     auxRod = nullptr;
+    diskSprite = nullptr;
+    numDisks = numRods = startRod = endRod = focus = NULL;
     moveInProgress = needConfirmation = doLargeValue = NULL;
 }
 
@@ -555,13 +562,21 @@ void towerOfHanoi::preGameEvent(sf::Event event)
             case sf::Keyboard::Tab:
             case sf::Keyboard::Down:
                 if(focus != 2)
-                    focus = (++focus)%2;
+                {
+                    focus = !focus;
+                    if(sfxTick[1].getPlayingOffset() < sf::milliseconds(5))
+                        sfxTick[1].play();
+                }
                 break;
 
             // Decrement focus
             case sf::Keyboard::Up:
                 if(focus != 2)
-                    focus = focus == 0 ? 1 : --focus;
+                {
+                    focus = !focus;
+                    if(sfxTick[1].getPlayingOffset() < sf::milliseconds(5))
+                        sfxTick[1].play();
+                }
                 break;
 
             // Decrement focused value
@@ -572,6 +587,8 @@ void towerOfHanoi::preGameEvent(sf::Event event)
                     doLargeValue = true;
                 else
                     decrementInputStr(focus);
+                if(sfxTick[0].getPlayingOffset() < sf::milliseconds(5))
+                    sfxTick[0].play();
                 break;
 
             // Increment focused value or set to confirm large value
@@ -582,6 +599,8 @@ void towerOfHanoi::preGameEvent(sf::Event event)
                     doLargeValue = false;
                 else
                     incrementInputStr(focus);
+                if(sfxTick[0].getPlayingOffset() < sf::milliseconds(5))
+                    sfxTick[0].play();
                 break;
 
             // Set to confirm large value
@@ -657,6 +676,8 @@ void towerOfHanoi::inGameEvent(sf::Event event)
             case sf::Keyboard::Space:
                 if(!moveInProgress && rod[endRod].size() != numDisks)
                 {
+                    if(sfxMove.getPlayingOffset() < sf::milliseconds(5))
+                        sfxMove.play();
                     getNextInstruction();
                     moveInProgress = true;
                     moveClock.restart();
@@ -800,7 +821,6 @@ void towerOfHanoi::setEndMessage()
 {
     // Set end message strings
     endMsg[1].setString("You did " + userMoveCount.getString() + " moves.");
-//    endMsg[2].setString("This puzzle can be solved in " + to_string(optimalNumMoves) + " moves.");
 
     // Set prompt enter string
     askEnter.setString("Press ENTER to restart");
@@ -848,7 +868,7 @@ void towerOfHanoi::getNextInstruction()
     if(!solveData.empty() && !moveInProgress)
     {
         // Play move sound
-        sfx.play();
+//        sfxMove.play();
 
         // Obtain next instruction in moveData
         instruction = solveData.front();
