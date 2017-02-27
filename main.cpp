@@ -4,5 +4,5 @@ int main()
 {
     towerOfHanoi b;
     b.run();
-//    return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
